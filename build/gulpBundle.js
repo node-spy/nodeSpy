@@ -1,6 +1,8 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -23,13 +25,124 @@ var NodeSpy = function (_React$Component) {
   function NodeSpy() {
     _classCallCheck(this, NodeSpy);
 
-    return _possibleConstructorReturn(this, (NodeSpy.__proto__ || Object.getPrototypeOf(NodeSpy)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (NodeSpy.__proto__ || Object.getPrototypeOf(NodeSpy)).call(this));
+
+    _this.state = {
+      reqCache: [{ Method: 'GET', URL: '/sample', Body: { 'a': 'apple', 'b': 'banana' }, Cookies: { 'one': 'one' }, Params: { 'two': 'two' } }, { Method: 'GET', URL: '/sample', Body: { 'c': 'cat', 'd': 'dog' }, Cookies: { 'three': 'three' }, Params: { 'four': 'four' } }]
+    };
+    return _this;
   }
+
+  _createClass(NodeSpy, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement('div', { className: 'NodeSpy' }),
+        _react2.default.createElement(Report, { reqCache: this.state.reqCache }),
+        _react2.default.createElement(History, { reqCache: this.state.reqCache })
+      );
+    }
+  }]);
 
   return NodeSpy;
 }(_react2.default.Component);
 
-render(_react2.default.createElement(NodeSpy, null), document.getElementById('content'));
+var Report = function Report(_ref) {
+  var reqCache = _ref.reqCache;
+
+  return _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement('div', { className: 'Report' })
+  );
+};
+
+Report.propTypes = {
+  'reqCache': _react2.default.PropTypes.array.isRequired
+};
+
+var ReportItem = function ReportItem(_ref2) {
+  var reqCache = _ref2.reqCache;
+
+  return _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement('div', { className: 'ReportItem' })
+  );
+};
+
+ReportItem.propTypes = {
+  'reqCache': _react2.default.PropTypes.array.isRequired
+};
+
+var History = function History(_ref3) {
+  var reqCache = _ref3.reqCache;
+
+
+  var historyArr = [];
+
+  reqCache.forEach(function (req) {
+    historyArr.push(_react2.default.createElement(HistoryItem, { reqCache: req }));
+  });
+
+  return _react2.default.createElement(
+    'div',
+    { id: 'history' },
+    historyArr
+  );
+};
+
+History.propTypes = {
+  'reqCache': _react2.default.PropTypes.array.isRequired
+};
+
+var HistoryItem = function HistoryItem(_ref4) {
+  var reqCache = _ref4.reqCache;
+
+  return _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement('span', { className: 'HistoryItem' }),
+    _react2.default.createElement(
+      'div',
+      null,
+      'Method: ',
+      reqCache.Method
+    ),
+    _react2.default.createElement(
+      'div',
+      null,
+      'URL: ',
+      reqCache.URL
+    ),
+    _react2.default.createElement(
+      'div',
+      null,
+      'Body: ',
+      JSON.stringify(reqCache.Body)
+    ),
+    _react2.default.createElement(
+      'div',
+      null,
+      'Cookies: ',
+      JSON.stringify(reqCache.Body)
+    ),
+    _react2.default.createElement(
+      'div',
+      null,
+      'Params: ',
+      JSON.stringify(reqCache.Params)
+    )
+  );
+};
+
+HistoryItem.propTypes = {
+  'reqCache': _react2.default.PropTypes.object.isRequired
+};
+
+_reactDom2.default.render(_react2.default.createElement(NodeSpy, null), document.getElementById('content'));
 
 },{"react":172,"react-dom":29}],2:[function(require,module,exports){
 (function (process){
