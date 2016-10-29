@@ -5,25 +5,26 @@ class NodeSpy extends React.Component {
   constructor() {
     super();
     this.state = {
-      reqCache = [],
-      resCache = []
+      reqCache = [{ Method: 'GET', URL: '/sample', Body: { 'a': 'apple', 'b': 'banana'}, Cookies: { 'one': 'one'}, Params: { 'two': 'two'} }
+                  { Method: 'GET', URL: '/sample', Body: { 'c': 'cat', 'd': 'dog'}, Cookies: { 'three': 'three'}, Params: { 'four': 'four'} }
+                ],
     }
   }
-  
+
 
 render() {
    return (
     <div>
       <div className = 'NodeSpy' />
-      <Report reqCache = {this.state.reqCache} resCache = {this.state.resCache} />
-      <History reqCache = {this.state.reqCache} resCache = {this.state.resCache} />
+      <Report reqCache = {this.state.reqCache} />
+      <History reqCache = {this.state.reqCache} />
     </div>
   )
 }
 
 }
 
-Report = ({ reqCache, resCache }) => {
+const Report = ({ reqCache}) => {
   return (
     <div>
       <div className = 'Report' />
@@ -32,11 +33,10 @@ Report = ({ reqCache, resCache }) => {
 };
 
 Report.propTypes = {
-  'reqCache': React.PropTypes.array.isRequired,
-  'resCache': React.PropTypes.array.isRequired
+  'reqCache': React.PropTypes.array.isRequired
 };
 
-ReportItem = ({ reqCache, resCache }) => {
+const ReportItem = ({ reqCache }) => {
   return (
     <div>
       <div className = 'ReportItem' />
@@ -45,34 +45,43 @@ ReportItem = ({ reqCache, resCache }) => {
 };
 
 ReportItem.propTypes = {
-  'reqCache': React.PropTypes.array.isRequired,
-  'resCache': React.PropTypes.array.isRequired
+  'reqCache': React.PropTypes.array.isRequired
 };
 
-History = ({ reqCache, resCache }) => {
+const History = ({ reqCache }) => {
+
+  let historyArr = [];
+
+  reqCache.forEach(req => {
+    historyArr.push(<HistoryItem reqCache={reqCache} />);
+  });
+
   return (
-    <div>
-      <div className = 'History' />
+    <div id='history'>
+      {historyArr}
     </div>
   );
 };
 
 History.propTypes = {
-  'reqCache': React.PropTypes.array.isRequired,
-  'resCache': React.PropTypes.array.isRequired
+  'reqCache': React.PropTypes.array.isRequired
 };
 
-HistoryItem = ({ reqCache, resCache }) => {
+const HistoryItem = ({ reqCache }) => {
   return (
     <div>
-      <div className = 'HistoryItem' />
+      <span className = 'HistoryItem' />
+      <div>Method: {reqCache.Method}</div>
+      <div>URL: {reqCache.URL}</div>
+      <div>Body: {reqCache.Body}</div>
+      <div>Cookies: {reqCache.Body}</div>
+      <div>Params: {reqCache.Params}</div>
     </div>
   );
 };
 
 HistoryItem.propTypes = {
-  'reqCache': React.PropTypes.array.isRequired,
-  'resCache': React.PropTypes.array.isRequired
+  'reqCache': React.PropTypes.array.isRequired
 };
 
 
