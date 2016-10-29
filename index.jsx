@@ -1,29 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 const ES6 = require('es6-promise').polyfill();
-const Fetch = require('isomorphic-fetch');
+const fetch = require('isomorphic-fetch');
 
 class NodeSpy extends React.Component {
   constructor() {
     super();
     this.state = {
-      reqCache: [{ Method: 'GET', URL: '/sample', Body: { 'a': 'apple', 'b': 'banana' }, Cookies: { 'one': 'one' }, Params: { 'two': 'two' } },
-      { Method: 'GET', URL: '/sample', Body: { 'c': 'cat', 'd': 'dog' }, Cookies: { 'three': 'three' }, Params: { 'four': 'four' } }
-      ],
-    }
-
-    componentDidMount() => {
-      fetch('/getCache', { credentials: 'include'})
-        .then(response => response.json())
-        .then(response => {
-          console.log(response);
-          this.setState({
-            reqCache: JSON.parse(response)
-          })
-        })
+      reqCache: [],
+      diffCache: []
     }
   }
 
+  componentDidMount() {
+    fetch('/getCache', { credentials: 'include' })
+      .then(response => response.json())
+      .then(response => {
+        this.setState({
+          reqCache: response
+        });
+      });
+  }
 
   render() {
     return (
@@ -34,7 +31,6 @@ class NodeSpy extends React.Component {
       </div>
     )
   }
-
 }
 
 const Report = ({ reqCache}) => {
