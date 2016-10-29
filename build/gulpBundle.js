@@ -121,38 +121,56 @@ var HistoryItem = function HistoryItem(_ref4) {
   var reqCache = _ref4.reqCache;
 
   return _react2.default.createElement(
-    _reactBootstrap.Jumbotron,
+    'div',
     null,
-    _react2.default.createElement('span', { className: 'HistoryItem' }),
     _react2.default.createElement(
-      'h1',
+      _reactBootstrap.Jumbotron,
       null,
-      'Method: ',
-      reqCache.Method
+      _react2.default.createElement(
+        'h1',
+        null,
+        'Node Spy'
+      ),
+      _react2.default.createElement(
+        'h2',
+        null,
+        'Reveal the mystery of the request object'
+      )
     ),
     _react2.default.createElement(
-      'h1',
+      _reactBootstrap.Well,
       null,
-      'URL: ',
-      reqCache.URL
-    ),
-    _react2.default.createElement(
-      'div',
-      null,
-      'Body: ',
-      JSON.stringify(reqCache.Body)
-    ),
-    _react2.default.createElement(
-      'div',
-      null,
-      'Cookies: ',
-      JSON.stringify(reqCache.Cookies)
-    ),
-    _react2.default.createElement(
-      'div',
-      null,
-      'Params: ',
-      JSON.stringify(reqCache.Params)
+      _react2.default.createElement('span', { className: 'HistoryItem' }),
+      _react2.default.createElement(
+        'h4',
+        null,
+        'Method: ',
+        reqCache.Method
+      ),
+      _react2.default.createElement(
+        'h4',
+        null,
+        'URL: ',
+        reqCache.URL
+      ),
+      _react2.default.createElement(
+        'div',
+        null,
+        'Body: ',
+        JSON.stringify(reqCache.Body)
+      ),
+      _react2.default.createElement(
+        'div',
+        null,
+        'Cookies: ',
+        JSON.stringify(reqCache.Cookies)
+      ),
+      _react2.default.createElement(
+        'div',
+        null,
+        'Params: ',
+        JSON.stringify(reqCache.Params)
+      )
     )
   );
 };
