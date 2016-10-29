@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Jumbotron} from 'react-bootstrap';
 const ES6 = require('es6-promise').polyfill();
 const fetch = require('isomorphic-fetch');
 
@@ -78,14 +79,14 @@ History.propTypes = {
 
 const HistoryItem = ({ reqCache }) => {
   return (
-    <div>
+    <Jumbotron>
       <span className='HistoryItem' />
-      <div>Method: {reqCache.Method}</div>
-      <div>URL: {reqCache.URL}</div>
+      <h4>Method: {reqCache.Method}</h4>
+      <h4>URL: {reqCache.URL}</h4>
       <div>Body: {JSON.stringify(reqCache.Body)}</div>
-      <div>Cookies: {JSON.stringify(reqCache.Body)}</div>
+      <div>Cookies: {JSON.stringify(reqCache.Cookies)}</div>
       <div>Params: {JSON.stringify(reqCache.Params)}</div>
-    </div>
+    </Jumbotron>
   );
 };
 
