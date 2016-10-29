@@ -9,7 +9,7 @@ app.get('/nodeSpy', (req, res, next) => {
 app.get('/gulpBundle.js', (req, res, next) => {
   res.sendFile(__dirname + '/build/gulpBundle.js');
 });
-app.post('/getCache', (req, res, next) => {
+app.get('/getCache', (req, res, next) => {
   res.end(JSON.stringify(nodeSpy.cache));
 });
 
