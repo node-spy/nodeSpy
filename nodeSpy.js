@@ -27,7 +27,7 @@ const nodeSpy = {
   },
   // log request and response data from user determined middleware point
   spy: (req, res, next) => {
-    nodeSpy.cache.push({ Method: req.method, URL: req.url });
+    nodeSpy.cache.push({ Method: req.method, URL: req.url, Body: req.body, Cookies: req.cookies, Params: req.params });
     next();
   },
   // redirect and serve data
