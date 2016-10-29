@@ -15,53 +15,65 @@ render() {
    return (
     <div>
       <div className = 'NodeSpy' />
-      <RouteView reqCache = {this.state.reqCache} resCache = {this.state.resCache} />
-      <ReqView reqCache = {this.state.reqCache} resCache = {this.state.resCache} />
-      <ResView reqCache = {this.state.reqCache} resCache = {this.state.resCache} />
+      <Report reqCache = {this.state.reqCache} resCache = {this.state.resCache} />
+      <History reqCache = {this.state.reqCache} resCache = {this.state.resCache} />
     </div>
   )
 }
 
 }
 
-RouteView = ({ reqCache, resCache }) => {
+Report = ({ reqCache, resCache }) => {
   return (
     <div>
-      <div className = 'RouteView' />
+      <div className = 'Report' />
     </div>
   )
 };
 
-RouteView.propTypes = {
+Report.propTypes = {
   'reqCache': React.PropTypes.array.isRequired,
   'resCache': React.PropTypes.array.isRequired
 };
 
-ReqView = ({ reqCache, resCache }) => {
+ReportItem = ({ reqCache, resCache }) => {
   return (
     <div>
-      <div className = 'ReqView' />
+      <div className = 'ReportItem' />
     </div>
   );
 };
 
-ReqView.propTypes = {
+ReportItem.propTypes = {
   'reqCache': React.PropTypes.array.isRequired,
   'resCache': React.PropTypes.array.isRequired
 };
 
-ResView = ({ reqCache, resCache }) => {
+History = ({ reqCache, resCache }) => {
   return (
     <div>
-      <div className = 'ResView' />
+      <div className = 'History' />
     </div>
   );
 };
 
-ResView.propTypes = {
+History.propTypes = {
+  'reqCache': React.PropTypes.array.isRequired,
+  'resCache': React.PropTypes.array.isRequired
+};
+
+HistoryItem = ({ reqCache, resCache }) => {
+  return (
+    <div>
+      <div className = 'HistoryItem' />
+    </div>
+  );
+};
+
+HistoryItem.propTypes = {
   'reqCache': React.PropTypes.array.isRequired,
   'resCache': React.PropTypes.array.isRequired
 };
 
 
-render(<NodeSpy/>, document.getElementById('content'));
+render(<NodeSpy />, document.getElementById('content'));
