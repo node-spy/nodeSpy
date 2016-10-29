@@ -11,89 +11,89 @@ class NodeSpy extends React.Component {
       reqCache: [],
       diffCache: []
     }
-  this.diffAlgorithm = this.diffAlgorithm.bind(this);
+  // this.diffAlgorithm = this.diffAlgorithm.bind(this);
   }
 
-diffAlgorithm(reqCache) {
-  let reqCacheLocal = reqCache;
-  let report = [];
-  // let exampleReport = [
-  // 	{Body: {OldBody: {}, NewBody: {}}}, 
-  //     {Cookies: {OldCookies: {}, NewCookies: {}}},
-  // 	{Params: {OldParams: {}, NewParams: {}}}
-  // ];
+// diffAlgorithm(reqCache) {
+//   let reqCacheLocal = reqCache;
+//   let report = [];
+//   // let exampleReport = [
+//   // 	{Body: {OldBody: {}, NewBody: {}}}, 
+//   //     {Cookies: {OldCookies: {}, NewCookies: {}}},
+//   // 	{Params: {OldParams: {}, NewParams: {}}}
+//   // ];
 
-  // Diffing algorithm for req.Body
+//   // Diffing algorithm for req.Body
 
-  for (let i = 0; i < reqCacheLocal.length - 1; i++) {
-    if (Object.keys(reqCacheLocal[i].Body).length !== Object.keys(reqCacheLocal[i + 1].Body).length) {
-      report.push({ Body: { OldBody: reqCacheLocal[i].Body, NewBody: reqCacheLocal[i + 1].Body } });
-      break;
-    }
+//   for (let i = 0; i < reqCacheLocal.length - 1; i++) {
+//     if (Object.keys(reqCacheLocal[i].Body).length !== Object.keys(reqCacheLocal[i + 1].Body).length) {
+//       report.push({ Body: { OldBody: reqCacheLocal[i].Body, NewBody: reqCacheLocal[i + 1].Body } });
+//       break;
+//     }
     
-    else {
-      for (let key in reqCacheLocal[i].Body) {
-        if (reqCacheLocal[i + 1].Body.key === undefined) {
-          console.log('if statement')
-          report.push({ Body: { OldBody: reqCacheLocal[i].Body, NewBody: reqCacheLocal[i + 1].Body } });
-          break;
-        }
-        else if (reqCacheLocal[i].Body[key] === reqCacheLocal[i + 1].Body[key]) {
-        report.push({ Body: { OldBody: reqCacheLocal[i].Body, NewBody: reqCacheLocal[i + 1].Body } });
-        break;
-        }
-      }
-    }
-  }
+//     else {
+//       for (let key in reqCacheLocal[i].Body) {
+//         if (reqCacheLocal[i + 1].Body.key === undefined) {
+//           console.log('if statement')
+//           report.push({ Body: { OldBody: reqCacheLocal[i].Body, NewBody: reqCacheLocal[i + 1].Body } });
+//           break;
+//         }
+//         else if (reqCacheLocal[i].Body[key] === reqCacheLocal[i + 1].Body[key]) {
+//         report.push({ Body: { OldBody: reqCacheLocal[i].Body, NewBody: reqCacheLocal[i + 1].Body } });
+//         break;
+//         }
+//       }
+//     }
+//   }
 
-  // Diffing algorithm for req.Cookies
+//   // Diffing algorithm for req.Cookies
 
-  for (let i = 0; i < reqCacheLocal.length - 1; i++) {
-    console.log('first for loop')
-    if (Object.keys(reqCacheLocal[i].Cookies).length !== Object.keys(reqCacheLocal[i + 1].Cookies).length) {
-      report.push({ Cookies: { OldCookies: reqCacheLocal[i].Cookies, NewCookies: reqCacheLocal[i + 1].Cookies } });
-      break;
-    }
+//   for (let i = 0; i < reqCacheLocal.length - 1; i++) {
+//     console.log('first for loop')
+//     if (Object.keys(reqCacheLocal[i].Cookies).length !== Object.keys(reqCacheLocal[i + 1].Cookies).length) {
+//       report.push({ Cookies: { OldCookies: reqCacheLocal[i].Cookies, NewCookies: reqCacheLocal[i + 1].Cookies } });
+//       break;
+//     }
     
-    else {
-      for (let key in reqCacheLocal[i].Cookies) {
-        console.log(key)
-        if (reqCacheLocal[i + 1].Cookies.key === undefined) {
-          report.push({ Cookies: { OldCookies: reqCacheLocal[i].Cookies, NewCookies: reqCacheLocal[i + 1].Cookies } });
-          break;
-        }
-        else if (reqCacheLocal[i].Cookies[key] === reqCacheLocal[i + 1].Cookies[key]) {
-        report.push({ Cookies: { OldCookies: reqCacheLocal[i].Cookies, NewCookies: reqCacheLocal[i + 1].Cookies } });  
-        break;
-        }
-      }
-    }
-  }
+//     else {
+//       for (let key in reqCacheLocal[i].Cookies) {
+//         console.log(key)
+//         if (reqCacheLocal[i + 1].Cookies.key === undefined) {
+//           report.push({ Cookies: { OldCookies: reqCacheLocal[i].Cookies, NewCookies: reqCacheLocal[i + 1].Cookies } });
+//           break;
+//         }
+//         else if (reqCacheLocal[i].Cookies[key] === reqCacheLocal[i + 1].Cookies[key]) {
+//         report.push({ Cookies: { OldCookies: reqCacheLocal[i].Cookies, NewCookies: reqCacheLocal[i + 1].Cookies } });  
+//         break;
+//         }
+//       }
+//     }
+//   }
 
-  // Diffing algorithm for req.Params
+//   // Diffing algorithm for req.Params
 
-  for (let i = 0; i < reqCacheLocal.length - 1; i++) {
-    console.log('first for loop')
-    if (Object.keys(reqCacheLocal[i].Params).length !== Object.keys(reqCacheLocal[i + 1].Params).length) {
-      report.push({ Params: { OldParams: reqCacheLocal[i].Params, NewParams: reqCacheLocal[i + 1].Params } });
-      break;
-    }
+//   for (let i = 0; i < reqCacheLocal.length - 1; i++) {
+//     console.log('first for loop')
+//     if (Object.keys(reqCacheLocal[i].Params).length !== Object.keys(reqCacheLocal[i + 1].Params).length) {
+//       report.push({ Params: { OldParams: reqCacheLocal[i].Params, NewParams: reqCacheLocal[i + 1].Params } });
+//       break;
+//     }
     
-    else {
-      for (let key in reqCacheLocal[i].Params) {
-        console.log(key)
-        if (reqCacheLocal[i + 1].Params.key === undefined) {
-          report.push({ Params: { OldParams: reqCacheLocal[i].Params, NewParams: reqCacheLocal[i + 1].Params } });
-          break;
-        }
-        else if (reqCacheLocal[i].Params[key] === reqCacheLocal[i + 1].Params[key]) {
-        report.push({ Params: { OldParams: reqCacheLocal[i].Params, NewParams: reqCacheLocal[i + 1].Params } });  
-        break;
-        }
-      }
-    }
-  }
-}
+//     else {
+//       for (let key in reqCacheLocal[i].Params) {
+//         console.log(key)
+//         if (reqCacheLocal[i + 1].Params.key === undefined) {
+//           report.push({ Params: { OldParams: reqCacheLocal[i].Params, NewParams: reqCacheLocal[i + 1].Params } });
+//           break;
+//         }
+//         else if (reqCacheLocal[i].Params[key] === reqCacheLocal[i + 1].Params[key]) {
+//         report.push({ Params: { OldParams: reqCacheLocal[i].Params, NewParams: reqCacheLocal[i + 1].Params } });  
+//         break;
+//         }
+//       }
+//     }
+//   }
+// }
 
   componentDidMount() {
     fetch('/getCache', { credentials: 'include' })
@@ -105,11 +105,13 @@ diffAlgorithm(reqCache) {
       });
   }
 
+  //diffAlgo={this.diffAlgorithm(this.state.reqCache)}
+  
   render() {
     return (
       <div>
         <div className='NodeSpy' />
-        <Report reqCache={this.state.reqCache} diffAlgo={this.createReportItems(this.state.reqCache)} />
+        <Report reqCache={this.state.reqCache} />
         <History reqCache={this.state.reqCache} />
       </div>
     )
@@ -118,16 +120,15 @@ diffAlgorithm(reqCache) {
 
 const Report = ({ reqCache, diffAlgo }) => {
 
-let reportArr = [];
+// let reportArr = [];
 
-diffAlgo.forEach(diff => {
-  reportArr.push(<ReportItem diffAlgo = {diff} />);
-});
+// diffAlgo.forEach(diff => {
+//   reportArr.push(<ReportItem diffAlgo = {diff} />);
+// });
 
   return (
     <div>
       <div className='Report' />
-      {reportArr}
     </div>
   )
 };
