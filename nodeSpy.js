@@ -6,6 +6,9 @@ const app = express();
 app.get('/nodeSpy', (req, res, next) => {
   res.sendFile(__dirname + '/index.html');
 });
+app.get('/gulpBundle.js', (req, res, next) => {
+  res.sendFile(__dirname + '/build/gulpBundle.js');
+});
 app.post('/getCache', (req, res, next) => {
   res.end(JSON.stringify(nodeSpy.cache));
 });
