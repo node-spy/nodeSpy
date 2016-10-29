@@ -10,15 +10,15 @@ app.get('/gulpBundle.js', (req, res, next) => {
   res.sendFile(__dirname + '/build/gulpBundle.js');
 });
 app.get('/getCache', (req, res, next) => {
-  res.end(JSON.stringify(nodeSpy.cache));
+  res.end(JSON.stringify(cache));
 });
 
 // set port during initial server call, for use in redirect
 let PORT;
+const cache = [];
 
 const nodeSpy = {
   // cache for pushing spy data to
-  cache: [],
   server: (port) => {
     PORT = port;
     app.listen(port, () => {
@@ -27,12 +27,13 @@ const nodeSpy = {
   },
   // log request and response data from user determined middleware point
   spy: (req, res, next) => {
-    nodeSpy.cache.push({ Method: req.method, URL: req.url, Body: req.body, Cookies: req.cookies, Params: req.params });
+    let method = req.method, url = req.url, body = req.body, cookies = req.cookies, params = req.params;
+    cache.push({ Method: method, URL: url, Body: body, Cookies: cookies, Params: params });
+    console.log(cache);
     next();
   },
   // redirect and serve data
   report: (req, res, next) => {
-    console.log(nodeSpy.cache);
     res.redirect(`http://localhost:${PORT}/nodeSpy`);
   }
 }

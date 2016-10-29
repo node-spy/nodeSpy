@@ -1,26 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Jumbotron} from 'react-bootstrap';
 const ES6 = require('es6-promise').polyfill();
-const Fetch = require('isomorphic-fetch');
+const fetch = require('isomorphic-fetch');
 
 class NodeSpy extends React.Component {
   constructor() {
     super();
     this.state = {
-      reqCache: [{ Method: 'GET', URL: '/sample', Body: { 'a': 'apple', 'b': 'banana' }, Cookies: { 'one': 'one' }, Params: { 'two': 'two' } },
-      { Method: 'GET', URL: '/sample', Body: { 'c': 'cat', 'd': 'dog' }, Cookies: { 'three': 'three' }, Params: { 'four': 'four' } }
-      ],
-    }
-
-    componentDidMount() => {
-      fetch('/getCache', { credentials: 'include'})
-        .then(response => response.json())
-        .then(response => {
-          console.log(response);
-          this.setState({
-            reqCache: JSON.parse(response)
-          })
-        })
+      reqCache: [],
+      diffCache: []
     }
   this.diffAlgorithm = this.diffAlgorithm.bind(this);
   }
@@ -106,6 +95,16 @@ diffAlgorithm(reqCache) {
   }
 }
 
+  componentDidMount() {
+    fetch('/getCache', { credentials: 'include' })
+      .then(response => response.json())
+      .then(response => {
+        this.setState({
+          reqCache: response
+        });
+      });
+  }
+
   render() {
     return (
       <div>
@@ -115,7 +114,6 @@ diffAlgorithm(reqCache) {
       </div>
     )
   }
-
 }
 
 const Report = ({ reqCache, diffAlgo }) => {
@@ -171,14 +169,14 @@ History.propTypes = {
 
 const HistoryItem = ({ reqCache }) => {
   return (
-    <div>
+    <Jumbotron>
       <span className='HistoryItem' />
-      <div>Method: {reqCache.Method}</div>
-      <div>URL: {reqCache.URL}</div>
+      <h4>Method: {reqCache.Method}</h4>
+      <h4>URL: {reqCache.URL}</h4>
       <div>Body: {JSON.stringify(reqCache.Body)}</div>
-      <div>Cookies: {JSON.stringify(reqCache.Body)}</div>
+      <div>Cookies: {JSON.stringify(reqCache.Cookies)}</div>
       <div>Params: {JSON.stringify(reqCache.Params)}</div>
-    </div>
+    </Jumbotron>
   );
 };
 
