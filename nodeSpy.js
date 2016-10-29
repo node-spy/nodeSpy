@@ -32,7 +32,6 @@ const nodeSpy = {
   },
   // redirect and serve data
   report: (req, res, next) => {
-    console.log(nodeSpy.cache);
     res.redirect(`http://localhost:${PORT}/nodeSpy`);
   }
 }
