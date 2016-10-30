@@ -14,6 +14,9 @@ class NodeSpy extends React.Component {
   // this.diffAlgorithm = this.diffAlgorithm.bind(this);
   }
 
+// This Diffing Algorithm checks for differences between adjacent reqLogs in the reqCache in sequential order
+// The output should be rendered inside of the Report component's ReportItems to showcase only the changes between reqLogs
+
 // diffAlgorithm(reqCache) {
 //   let reqCacheLocal = reqCache;
 //   let report = [];
@@ -118,6 +121,8 @@ class NodeSpy extends React.Component {
   }
 }
 
+// The Report should showcase only the changes between adjacted reqLogs. HINT: Use minion.png to represent a nodeSpy.
+
 const Report = ({ reqCache, diffAlgo }) => {
 
 // let reportArr = [];
@@ -149,6 +154,8 @@ ReportItem.propTypes = {
   'reqCache': React.PropTypes.array.isRequired
 };
 
+// The History should be a div containing HistoryItem rows, which each display content from an object within the reqCache array.
+
 const History = ({ reqCache }) => {
 
   let historyArr = [];
@@ -171,6 +178,7 @@ History.propTypes = {
 const HistoryItem = ({ reqCache }) => {
   return (
     <div>
+
       <Jumbotron>
         <h1>Node Spy</h1>
         <h2>Reveal the mystery of the request object</h2>

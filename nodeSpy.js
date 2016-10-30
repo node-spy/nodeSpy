@@ -30,7 +30,8 @@ const nodeSpy = {
   },
   // log request and response data from user determined middleware point
   spy: (req, res, next) => {
-    // let method = req.method, url = req.url, body = req.body, cookies = req.cookies, params = req.params;
+    // HINT: Try stringifying the currentLog before pushing to the cache to avoid object reference issues
+
     const currentLog = { Method: req.method, URL: req.url, Body: req.body, Cookies: req.cookies, Params: req.params };
     const cloneLog = {};
     Object.assign(cloneLog, currentLog);
